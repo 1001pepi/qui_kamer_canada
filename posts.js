@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require("body-parser");
 const db = require("./models");
+require('dotenv').config();
 
 db.sequelize.sync({ force: true }).then(() => {
   console.log("Drop and re-sync db.");
@@ -49,6 +50,6 @@ app.use('/real_estate_post', realEstatePostRoutes);
 app.use('/restoration_post', restorationPostRoutes);
 app.use('/service_post', servicePostRoutes);
 
-app.listen(4000, () => {
+app.listen(process.env.PORT || 4000 , () => {
   console.log("Up and running! -- This is our posts service");
 })
